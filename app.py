@@ -139,7 +139,7 @@ def form():
 
         return send_file(output_path, as_attachment=True)
 
-    return render_template("form.html")
+    return render_template("form.html", today=datetime.date.today().isoformat())
 
 @app.route('/logout')
 @login_required
@@ -149,5 +149,5 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('login'))
 
-if _name_ == '_main_':
+if _name_ == '__main__':
     app.run(debug=True)
