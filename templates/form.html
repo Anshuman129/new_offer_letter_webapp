@@ -146,11 +146,14 @@
     </div>
 </div>
 
-<<script>
+<script>
     document.querySelector("form").addEventListener("submit", function () {
         const btn = document.querySelector("button[type='submit']");
         btn.innerHTML = "Generating...";
-        btn.disabled = true;
+        // Do NOT disable button, since download prevents reload
+        setTimeout(() => {
+            btn.innerHTML = "Generate Offer Letter";
+        }, 4000);
     });
 </script>
 
