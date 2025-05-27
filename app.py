@@ -107,13 +107,44 @@ def form():
         letter_date_raw = request.form['letter_date']
         template_file = request.form['template']
         
-        doc = DocxTemplate(f"templates/word_templates/{template_file}")
 
+        # ✅ Validate name input
+        import re
+        name_pattern = re.compile(r'^[A-Za-z]+$')
+        if not name_pattern.match(first_name.strip()) or not name_pattern.match(last_name.strip()):
+            flash("First and Last names must contain only alphabets.", "error")
+            return render_template("form.html", today=datetime.date.today().isoformat())
+
+        # ✅ Validate date inputs
+        today = datetime.date.today()
+        start_date_obj = datetime.datetime.strptime(start_date_raw, "%Y-%m-%d").date()
+        end_date_obj = datetime.datetime.strptime(end_date_raw, "%Y-%m-%d").date()
+
+        if start_date_obj < today:
+            flash("Start date cannot be in the past.", "error")
+            return render_template("form.html", today=today.isoformat())
+
+        expected_end_date = start_date_obj + datetime.timedelta(days=90)
+        if end_date_obj != expected_end_date:
+            flash("End date must be exactly 3 months from start date.", "error")
+            return render_template("form.html", today=today.isoformat())
+
+        letter_date = datetime.datetime.strptime(letter_date_raw, "%Y-%m-%d").date()
+
+        # ✅ Format display-friendly dates
         start_date = format_date_with_suffix(start_date_raw)
         end_date = format_date_with_suffix(end_date_raw)
         letter_date = format_date_with_suffix(letter_date_raw)
-        
+
+        # ✅ Clean and combine names
         full_name = " ".join(part.strip() for part in [first_name, middle_name, last_name] if part.strip())
+
+        # ✅ Calculate duration for use in letter
+        duration = (end_date_obj - start_date_obj).days
+        duration_months = round(duration / 30)
+
+        # ✅ Load and render document
+        doc = DocxTemplate(f"templates/word_templates/{template_file}")
         
         context = {
             'full_name': full_name,
@@ -139,7 +170,7 @@ def form():
 
         return send_file(output_path, as_attachment=True)
 
-    return render_template("form.html")
+    return render_template("form.html", today=datetime.date.today().isoformat())
 
 @app.route('/logout')
 @login_required
