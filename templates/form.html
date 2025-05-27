@@ -157,22 +157,14 @@
     });
 </script>
 
-<script>
-    document.querySelector("form").addEventListener("submit", function () {
-        const btn = document.querySelector("button[type='submit']");
-        btn.innerHTML = "Generating...";
-        btn.disabled = true;
-    });
-</script>
     
 <script>
     document.querySelector("input[name='start_date']").addEventListener("change", function () {
         const startDate = new Date(this.value);
         if (isNaN(startDate)) return;
 
-        // Add 90 days
         const endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 90);
+        endDate.setDate(endDate.getDate() + 90); // Adds 90 days
 
         const year = endDate.getFullYear();
         const month = String(endDate.getMonth() + 1).padStart(2, '0');
@@ -182,9 +174,10 @@
 
         const endDateInput = document.querySelector("input[name='end_date']");
         endDateInput.value = formattedEndDate;
-        endDateInput.readOnly = true;
+        // 🟢 Removed `readOnly = true` to allow manual edits
     });
 </script>
+
 
     
 </body>
