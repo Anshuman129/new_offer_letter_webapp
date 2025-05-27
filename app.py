@@ -14,7 +14,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")# Hide this in env vars for production
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(_name_, template_folder='templates')
 app.secret_key = 'your-secret-key'  # Make sure this is secure!
 
 # ✅ Date formatting function
@@ -107,44 +107,13 @@ def form():
         letter_date_raw = request.form['letter_date']
         template_file = request.form['template']
         
+        doc = DocxTemplate(f"templates/word_templates/{template_file}")
 
-        # ✅ Validate name input
-        import re
-        name_pattern = re.compile(r'^[A-Za-z]+$')
-        if not name_pattern.match(first_name.strip()) or not name_pattern.match(last_name.strip()):
-            flash("First and Last names must contain only alphabets.", "error")
-            return render_template("form.html", today=datetime.date.today().isoformat())
-
-        # ✅ Validate date inputs
-        today = datetime.date.today()
-        start_date_obj = datetime.datetime.strptime(start_date_raw, "%Y-%m-%d").date()
-        end_date_obj = datetime.datetime.strptime(end_date_raw, "%Y-%m-%d").date()
-
-        if start_date_obj < today:
-            flash("Start date cannot be in the past.", "error")
-            return render_template("form.html", today=today.isoformat())
-
-        expected_end_date = start_date_obj + datetime.timedelta(days=90)
-        if end_date_obj != expected_end_date:
-            flash("End date must be exactly 3 months from start date.", "error")
-            return render_template("form.html", today=today.isoformat())
-
-        letter_date = datetime.datetime.strptime(letter_date_raw, "%Y-%m-%d").date()
-
-        # ✅ Format display-friendly dates
         start_date = format_date_with_suffix(start_date_raw)
         end_date = format_date_with_suffix(end_date_raw)
         letter_date = format_date_with_suffix(letter_date_raw)
-
-        # ✅ Clean and combine names
+        
         full_name = " ".join(part.strip() for part in [first_name, middle_name, last_name] if part.strip())
-
-        # ✅ Calculate duration for use in letter
-        duration = (end_date_obj - start_date_obj).days
-        duration_months = round(duration / 30)
-
-        # ✅ Load and render document
-        doc = DocxTemplate(f"templates/word_templates/{template_file}")
         
         context = {
             'full_name': full_name,
@@ -160,7 +129,7 @@ def form():
 
         safe_first_name = first_name.strip().capitalize().replace(" ", "_")
         safe_role = role.strip().replace(" ", "_").capitalize()
-        output_filename = f"{safe_first_name}_Offer_Letter_{safe_role}.docx"
+        output_filename = f"{safe_first_name}Offer_Letter{safe_role}.docx"
         output_path = os.path.join("generated_letters", output_filename)
 
         os.makedirs("generated_letters", exist_ok=True)
@@ -168,12 +137,9 @@ def form():
         doc.render(context)
         doc.save(output_path)
 
-        return send_file(output_path, as_attachment=True, download_name=output_filename)
+        return send_file(output_path, as_attachment=True)
 
-
-    
-    return render_template("form.html", today=datetime.date.today().isoformat())
-
+    return render_template("form.html")
 
 @app.route('/logout')
 @login_required
@@ -183,5 +149,5 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('login'))
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
