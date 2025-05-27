@@ -133,17 +133,15 @@ def form():
         # ✅ Calculate duration for use in letter
         duration = (end_date_obj - start_date_obj).days
         duration_months = round(duration / 30)
-
         
+        doc = DocxTemplate(f"templates/word_templates/{template_file}")
 
         start_date = format_date_with_suffix(start_date_raw)
         end_date = format_date_with_suffix(end_date_raw)
         letter_date = format_date_with_suffix(letter_date_raw)
-
+        
         full_name = " ".join(part.strip() for part in [first_name, middle_name, last_name] if part.strip())
-
-        doc = DocxTemplate(f"templates/word_templates/{template_file}")
-
+        
         context = {
             'full_name': full_name,
             'first_name': first_name,
