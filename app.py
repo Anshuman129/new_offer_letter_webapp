@@ -14,7 +14,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")# Hide this in env vars for production
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-app = Flask(_name_, template_folder='templates')
+app = Flask(__name__, template_folder='templates')
 app.secret_key = 'your-secret-key'  # Make sure this is secure!
 
 # ✅ Date formatting function
@@ -149,5 +149,5 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('login'))
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
