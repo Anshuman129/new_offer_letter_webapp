@@ -149,5 +149,5 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('login'))
 
-if _name_ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
