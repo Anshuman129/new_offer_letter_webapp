@@ -53,6 +53,16 @@
 <div class="container">
     <div class="form-container fade-in">
         <h2>Offer Letter Generator</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
         <form method="POST">
             <div class="mb-3">
                 <label for="template" class="form-label">Select Template</label>
@@ -154,5 +164,35 @@
     });
 </script> -->
 
+<script>
+    document.querySelector("form").addEventListener("submit", function () {
+        const btn = document.querySelector("button[type='submit']");
+        btn.innerHTML = "Generating...";
+        btn.disabled = true;
+    });
+</script>
+    
+<script>
+    document.querySelector("input[name='start_date']").addEventListener("change", function () {
+        const startDate = new Date(this.value);
+        if (isNaN(startDate)) return;
+
+        // Add 90 days
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 90);
+
+        const year = endDate.getFullYear();
+        const month = String(endDate.getMonth() + 1).padStart(2, '0');
+        const day = String(endDate.getDate()).padStart(2, '0');
+
+        const formattedEndDate = `${year}-${month}-${day}`;
+
+        const endDateInput = document.querySelector("input[name='end_date']");
+        endDateInput.value = formattedEndDate;
+        endDateInput.readOnly = true;
+    });
+</script>
+
+    
 </body>
 </html>
