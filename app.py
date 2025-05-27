@@ -171,8 +171,7 @@ def form():
         return send_file(output_path, as_attachment=True, download_name=output_filename)
 
 
-    if not os.path.exists(output_path):
-    flash("Error: Offer letter not found.", "error")
+    
     return render_template("form.html", today=datetime.date.today().isoformat())
 
 
