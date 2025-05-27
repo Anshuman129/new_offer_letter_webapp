@@ -139,7 +139,7 @@ def form():
 
         return send_file(output_path, as_attachment=True)
 
-    return render_template("form.html", today=datetime.date.today().isoformat())
+    return render_template("form.html")
 
 @app.route('/logout')
 @login_required
