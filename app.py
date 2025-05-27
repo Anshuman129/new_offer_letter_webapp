@@ -106,33 +106,6 @@ def form():
         end_date_raw = request.form['end_date']
         letter_date_raw = request.form['letter_date']
         template_file = request.form['template']
-
-        # ✅ Validate name input
-        import re
-        name_pattern = re.compile(r'^[A-Za-z]+$')
-        if not name_pattern.match(first_name.strip()) or not name_pattern.match(last_name.strip()):
-            flash("First and Last names must contain only alphabets.", "error")
-            return render_template("form.html", today=datetime.date.today().isoformat())
-
-        # ✅ Validate date inputs
-        today = datetime.date.today()
-        start_date_obj = datetime.datetime.strptime(start_date_raw, "%Y-%m-%d").date()
-        end_date_obj = datetime.datetime.strptime(end_date_raw, "%Y-%m-%d").date()
-
-        if start_date_obj < today:
-            flash("Start date cannot be in the past.", "error")
-            return render_template("form.html", today=today.isoformat())
-
-        expected_end_date = start_date_obj + datetime.timedelta(days=90)
-        if end_date_obj != expected_end_date:
-            flash("End date must be exactly 3 months from start date.", "error")
-            return render_template("form.html", today=today.isoformat())
-
-        letter_date = datetime.datetime.strptime(letter_date_raw, "%Y-%m-%d").date()
-
-        # ✅ Calculate duration for use in letter
-        duration = (end_date_obj - start_date_obj).days
-        duration_months = round(duration / 30)
         
         doc = DocxTemplate(f"templates/word_templates/{template_file}")
 
