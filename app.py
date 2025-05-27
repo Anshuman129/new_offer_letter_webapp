@@ -113,7 +113,10 @@ def form():
         end_date = format_date_with_suffix(end_date_raw)
         letter_date = format_date_with_suffix(letter_date_raw)
 
+        full_name = " ".join(part.strip() for part in [first_name, middle_name, last_name] if part.strip())
+
         context = {
+            'full_name': full_name,
             'first_name': first_name,
             'middle_name': middle_name,
             'last_name': last_name,
