@@ -129,7 +129,7 @@ def form():
 
         safe_first_name = first_name.strip().capitalize().replace(" ", "_")
         safe_role = role.strip().replace(" ", "_").capitalize()
-        output_filename = f"{safe_first_name}Offer_Letter.docx"
+        output_filename = f"{safe_first_name}_Offer_Letter.docx"
         output_path = os.path.join("generated_letters", output_filename)
 
         os.makedirs("generated_letters", exist_ok=True)
