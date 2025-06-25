@@ -42,8 +42,8 @@ def index():
 
 # Replace Supabase check with this inside your login route
 VALID_USERS = {
-    "test@example.com": "password123",
-    "admin@example.com": "adminpass"
+    "anshumanaggarwal11@gmail.com": "Anshuman",
+    "unlockdiscounts": "ud@1013"
 }
 
 @app.route('/login', methods=['GET', 'POST'])
