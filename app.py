@@ -40,58 +40,30 @@ def index():
         return redirect(url_for('form'))
     return redirect(url_for('login'))
 
+# Replace Supabase check with this inside your login route
+VALID_USERS = {
+    "test@example.com": "password123",
+    "admin@example.com": "adminpass"
+}
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
 
-        try:
-            result = supabase.auth.sign_in_with_password({
-                'email': email,
-                'password': password
-            })
-
-            if result.session:
-                session['token'] = result.session.access_token
-                session['user'] = email
-                flash('Login successful!', 'success')
-                return redirect(url_for('form'))
-            else:
-                flash('Login failed. Please check your credentials.', 'error')
-
-        except Exception as e:
-            flash(f'Error: {str(e)}', 'error')
+        if VALID_USERS.get(email) == password:
+            session['token'] = 'dummy_token'
+            session['user'] = email
+            flash('Login successful!', 'success')
+            return redirect(url_for('form'))
+        else:
+            flash('Invalid email or password.', 'error')
 
     return render_template('login.html')
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
 
-        if password != confirm_password:
-            flash('Passwords do not match.', 'error')
-            return render_template('register.html')
 
-        try:
-            result = supabase.auth.sign_up({
-                'email': email,
-                'password': password
-            })
-
-            if result.user:
-                flash('Registration successful! Please check your email to verify.', 'success')
-                return redirect(url_for('login'))
-            else:
-                flash('Registration failed.', 'error')
-
-        except Exception as e:
-            flash(f'Error: {str(e)}', 'error')
-
-    return render_template('register.html')
 
 @app.route('/form', methods=['GET', 'POST'])
 @login_required
