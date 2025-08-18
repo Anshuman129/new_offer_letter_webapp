@@ -113,6 +113,44 @@ def form():
 
     return render_template("form.html", today=datetime.date.today().isoformat())
 
+# 🔹 RELIEVING LETTER ROUTE
+@app.route('/relieving-form', methods=['GET', 'POST'])
+@login_required
+def relieving_form():
+    if request.method == 'POST':
+        full_name = request.form['full_name']
+        role = request.form['role']
+        start_date_raw = request.form['start_date']
+        end_date_raw = request.form['end_date']
+        letter_date_raw = request.form['letter_date']
+        template_file = request.form['gender']
+        
+        doc = DocxTemplate(f"templates/word_templates/{template_file}")
+
+        start_date = format_date_with_suffix(start_date_raw)
+        end_date = format_date_with_suffix(end_date_raw)
+        letter_date = format_date_with_suffix(letter_date_raw)
+        
+        context = {
+            'full_name': full_name,
+            'role': role,
+            'start_date': start_date,
+            'end_date': end_date,
+            'letter_date': letter_date
+        }
+
+        output_filename = f"{full_name}_Relieving_Letter.docx"
+        output_path = os.path.join("generated_letters", output_filename)
+
+        os.makedirs("generated_letters", exist_ok=True)
+
+        doc.render(context)
+        doc.save(output_path)
+
+        return send_file(output_path, as_attachment=True)
+
+    return render_template("relieving_form.html", today=datetime.date.today().isoformat())
+
 @app.route('/logout')
 @login_required
 def logout():
