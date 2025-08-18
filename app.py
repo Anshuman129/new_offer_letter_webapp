@@ -114,7 +114,7 @@ def form():
     return render_template("form.html", today=datetime.date.today().isoformat())
 
 # 🔹 RELIEVING LETTER ROUTE
-@app.route('/relieving-form', methods=['GET', 'POST'])
+@app.route('/relieving_form', methods=['GET', 'POST'])
 @login_required
 def relieving_form():
     if request.method == 'POST':
