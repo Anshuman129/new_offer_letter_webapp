@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Relieving Letter Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            font-family: 'Inter', sans-serif;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 5rem auto;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>UD Letter Generator</h1>
+        <nav>
+            <a href="form.html">Offer Letter</a>
+            <a href="relieving_form.html">Relieving Letter</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="form-container fade-in">
+            <h2>Relieving Letter Generator</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Intern Full Name</label>
+                    <input type="text" name="full_name" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-control" required>
+                        <option disabled selected>Select a role</option>
+                        <option>Academic Mentor</option>
+                        <option>Academic Research</option>
+                        <option>Accounts Assistant</option>
+                        <option>Cinematic Video Editing</option>
+                        <option>Content Writer</option>
+                        <option>Data Analyst</optionalue=>
+                        <option>Database Offer</option>
+                        <option>Digital Marketing</option>
+                        <option>Engagement Creater</option>
+                        <option>Graphic Design</optione=>
+                        <option>Human Resource</optionvalue=>
+                        <option>Operations Manager</optionvalue=>
+                        <option>Performance Marketer</option>
+                        <option>Quality Analyst</option>
+                        <option>Scrum Master</option>
+                        <option>Software Developer</optionvalue=>
+                        <option>Tax Executive</optione=>
+                        <option>Tax Manager</option>
+                        <option>Team Lead</optionalue=>
+                        <option>UI/UX</option>
+                        <option>Video Editing</optionvalue=>
+                        <option>WordPress Developer</option=>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <select name="gender" class="form-control" required>
+                        <option disabled selected>Select a role</option>
+                        <option value="male.docx">Male</option>
+                        <option value="female.docx">Female</option>
+                    </select>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="start_date" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Last Working Day</label>
+                    <input type="date" name="end_date" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Letter Date</label>
+                    <input type="date" name="letter_date" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Serial Number</label>
+                    <input type="text" name="sr_no" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Generate Relieving Letter</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function () {
+            const btn = document.querySelector("button[type='submit']");
+            btn.innerHTML = "Generating...";
+            setTimeout(() => {
+                btn.innerHTML = "Generate Relieving Letter";
+            }, 3000);
+        });
+    </script>
+
+</body>
+
+</html>
