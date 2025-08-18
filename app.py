@@ -124,7 +124,7 @@ def relieving_form():
         start_date_raw = request.form['start_date']
         end_date_raw = request.form['end_date']
         letter_date_raw = request.form['letter_date']
-        template_file = request.form['gender']
+        template_file = request.form['template']
         
         doc = DocxTemplate(f"templates/word_templates/{template_file}")
 
