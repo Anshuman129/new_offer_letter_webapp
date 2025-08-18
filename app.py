@@ -120,6 +120,7 @@ def relieving_form():
     if request.method == 'POST':
         full_name = request.form['full_name']
         role = request.form['role']
+        sr_no = request.form['sr_no']
         start_date_raw = request.form['start_date']
         end_date_raw = request.form['end_date']
         letter_date_raw = request.form['letter_date']
@@ -134,6 +135,7 @@ def relieving_form():
         context = {
             'full_name': full_name,
             'role': role,
+            'sr_no': sr_no,
             'start_date': start_date,
             'end_date': end_date,
             'letter_date': letter_date
