@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Offer Letter Generator</title>
@@ -13,6 +14,29 @@
             background: linear-gradient(to right, #e0eafc, #cfdef3);
             font-family: 'Inter', sans-serif;
         }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
         .form-container {
             max-width: 600px;
             margin: 5rem auto;
@@ -21,170 +45,195 @@
             padding: 2rem;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
         }
+
         h2 {
             text-align: center;
             font-weight: 600;
             color: #333;
             margin-bottom: 1.5rem;
         }
-        .form-control:focus, .form-select:focus {
+
+        .form-control:focus,
+        .form-select:focus {
             border-color: #007bff;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
         }
+
         .btn-primary {
             background-color: #007bff;
             border: none;
             transition: 0.3s ease;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
         }
+
         .fade-in {
             animation: fadeIn 0.8s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(20px);}
-            to {opacity: 1; transform: translateY(0);}
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
+    <header>
+        <h1>UD Letter Generator</h1>
+        <nav>
+            <a href="form.html">Offer Letter</a>
+            <a href="relieving_form.html">Relieving Letter</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="form-container fade-in">
+            <h2>Offer Letter Generator</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="template" class="form-label">Select Template</label>
+                    <select name="template" class="form-select" required>
+                        <option value="" disabled selected>Select a template</option>
+                        <option value="AcademicMentor.docx">Academic Mentor</option>
+                        <option value="AcademicResearch.docx">Academic Research</option>
+                        <option value="AccountsAssistant.docx">Accounts Assistant</option>
+                        <option value="CinematicVideoEditing.docx">Cinematic Video Editing</option>
+                        <option value="ContentWriter.docx">Content Writer</option>
+                        <option value="DataAnalyst.docx">Data Analyst</option>
+                        <option value="DatabaseOffer.docx">Database Offer</option>
+                        <option value="DigitalMarketing.docx">Digital Marketing</option>
+                        <option value="EngagementCreator.docx">Engagement Creater</option>
+                        <option value="GraphicDesign.docx">Graphic Design</option>
+                        <option value="HumanResource.docx">Human Resource</option>
+                        <option value="OperationsManager.docx">Operations Manager</option>
+                        <option value="PerformanceMarketer.docx">Performance Marketer</option>
+                        <option value="QualityAnalyst.docx">Quality Analyst</option>
+                        <option value="ScrumMaster.docx">Scrum Master</option>
+                        <option value="SoftwareDeveloper.docx">Software Developer</option>
+                        <option value="TaxExecutive.docx">Tax Executive</option>
+                        <option value="TaxManager.docx">Tax Manager</option>
+                        <option value="TeamLead.docx">Team Lead</option>
+                        <option value="UIUX.docx">UI/UX</option>
+                        <option value="VideoEditing.docx">Video Editing</option>
+                        <option value="WordPressDeveloper.docx">WordPress Developer</option>
+                    </select>
+                </div>
 
-<div class="container">
-    <div class="form-container fade-in">
-        <h2>Offer Letter Generator</h2>
-        <form method="POST">
-            <div class="mb-3">
-                <label for="template" class="form-label">Select Template</label>
-                <select name="template" class="form-select" required>
-                    <option value="" disabled selected>Select a template</option>
-                    <option value="AcademicMentor.docx">Academic Mentor</option>
-                    <option value="AcademicResearch.docx">Academic Research</option>
-                    <option value="AccountsAssistant.docx">Accounts Assistant</option>
-                    <option value="CinematicVideoEditing.docx">Cinematic Video Editing</option>
-                    <option value="ContentWriter.docx">Content Writer</option>
-                    <option value="DataAnalyst.docx">Data Analyst</option>
-                    <option value="DatabaseOffer.docx">Database Offer</option>
-                    <option value="DigitalMarketing.docx">Digital Marketing</option>
-                    <option value="EngagementCreator.docx">Engagement Creater</option>
-                    <option value="GraphicDesign.docx">Graphic Design</option>
-                    <option value="HumanResource.docx">Human Resource</option>
-                    <option value="OperationsManager.docx">Operations Manager</option>
-                    <option value="PerformanceMarketer.docx">Performance Marketer</option>
-                    <option value="QualityAnalyst.docx">Quality Analyst</option>
-                    <option value="ScrumMaster.docx">Scrum Master</option>
-                    <option value="SoftwareDeveloper.docx">Software Developer</option>
-                    <option value="TaxExecutive.docx">Tax Executive</option>
-                    <option value="TaxManager.docx">Tax Manager</option>
-                    <option value="TeamLead.docx">Team Lead</option>
-                    <option value="UIUX.docx">UI/UX</option>
-                    <option value="VideoEditing.docx">Video Editing</option>
-                    <option value="WordPressDeveloper.docx">WordPress Developer</option>
-                </select>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">First Name</label>
+                    <input type="text" name="first_name" class="form-control" placeholder="John" pattern="[A-Za-z]+"
+                        title="Only alphabets allowed" required>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input type="text" name="first_name" class="form-control" placeholder="John" pattern="[A-Za-z]+" title="Only alphabets allowed" required>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Middle Name</label>
+                    <input type="text" name="middle_name" class="form-control" placeholder="Marshel" pattern="[A-Za-z]+"
+                        title="Only alphabets allowed">
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Middle Name</label>
-                <input type="text" name="middle_name" class="form-control" placeholder="Marshel" pattern="[A-Za-z]+" title="Only alphabets allowed">
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" placeholder="Doe" pattern="[A-Za-z]+"
+                        title="Only alphabets allowed" required>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Last Name</label>
-                <input type="text" name="last_name" class="form-control" placeholder="Doe" pattern="[A-Za-z]+" title="Only alphabets allowed" required>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-select" required>
+                        <option value="" disabled selected>Select a role</option>
+                        <option value="AcademicMentor.docx">Academic Mentor</option>
+                        <option value="AcademicResearch.docx">Academic Research</option>
+                        <option value="AccountsAssistant.docx">Accounts Assistant</option>
+                        <option value="CinematicVideoEditing.docx">Cinematic Video Editing</option>
+                        <option value="ContentWriter.docx">Content Writer</option>
+                        <option value="DataAnalyst.docx">Data Analyst</option>
+                        <option value="DatabaseOffer.docx">Database Offer</option>
+                        <option value="DigitalMarketing.docx">Digital Marketing</option>
+                        <option value="EngagementCreator.docx">Engagement Creater</option>
+                        <option value="GraphicDesign.docx">Graphic Design</option>
+                        <option value="HumanResource.docx">Human Resource</option>
+                        <option value="OperationsManager.docx">Operations Manager</option>
+                        <option value="PerformanceMarketer.docx">Performance Marketer</option>
+                        <option value="QualityAnalyst.docx">Quality Analyst</option>
+                        <option value="ScrumMaster.docx">Scrum Master</option>
+                        <option value="SoftwareDeveloper.docx">Software Developer</option>
+                        <option value="TaxExecutive.docx">Tax Executive</option>
+                        <option value="TaxManager.docx">Tax Manager</option>
+                        <option value="TeamLead.docx">Team Lead</option>
+                        <option value="UIUX.docx">UI/UX</option>
+                        <option value="VideoEditing.docx">Video Editing</option>
+                        <option value="WordPressDeveloper.docx">WordPress Developer</option>
+                    </select>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Role</label>
-                <select name="role" class="form-select" required>
-                    <option value="" disabled selected>Select a role</option>
-                    <option value="AcademicMentor.docx">Academic Mentor</option>
-                    <option value="AcademicResearch.docx">Academic Research</option>
-                    <option value="AccountsAssistant.docx">Accounts Assistant</option>
-                    <option value="CinematicVideoEditing.docx">Cinematic Video Editing</option>
-                    <option value="ContentWriter.docx">Content Writer</option>
-                    <option value="DataAnalyst.docx">Data Analyst</option>
-                    <option value="DatabaseOffer.docx">Database Offer</option>
-                    <option value="DigitalMarketing.docx">Digital Marketing</option>
-                    <option value="EngagementCreator.docx">Engagement Creater</option>
-                    <option value="GraphicDesign.docx">Graphic Design</option>
-                    <option value="HumanResource.docx">Human Resource</option>
-                    <option value="OperationsManager.docx">Operations Manager</option>
-                    <option value="PerformanceMarketer.docx">Performance Marketer</option>
-                    <option value="QualityAnalyst.docx">Quality Analyst</option>
-                    <option value="ScrumMaster.docx">Scrum Master</option>
-                    <option value="SoftwareDeveloper.docx">Software Developer</option>
-                    <option value="TaxExecutive.docx">Tax Executive</option>
-                    <option value="TaxManager.docx">Tax Manager</option>
-                    <option value="TeamLead.docx">Team Lead</option>
-                    <option value="UIUX.docx">UI/UX</option>
-                    <option value="VideoEditing.docx">Video Editing</option>
-                    <option value="WordPressDeveloper.docx">WordPress Developer</option>
-                </select>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" placeholder="example@email.com" required>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-control" placeholder="example@email.com" required>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="start_date" class="form-control" min="{{ today }}" required>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Start Date</label>
-                <input type="date" name="start_date" class="form-control" min="{{ today }}" required>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="end_date" class="form-control" required>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">End Date</label>
-                <input type="date" name="end_date" class="form-control" required>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Letter Date</label>
+                    <input type="date" name="letter_date" class="form-control" required>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Letter Date</label>
-                <input type="date" name="letter_date" class="form-control" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Generate Offer Letter</button>
-        </form>
+                <button type="submit" class="btn btn-primary w-100">Generate Offer Letter</button>
+            </form>
+        </div>
     </div>
-</div>
 
-<script>
-    document.querySelector("form").addEventListener("submit", function () {
-        const btn = document.querySelector("button[type='submit']");
-        btn.innerHTML = "Generating...";
-        // Do NOT disable button, since download prevents reload
-        setTimeout(() => {
-            btn.innerHTML = "Generate Offer Letter";
-        }, 4000);
-    });
-</script>
-
-    
-<script>
-    document.querySelector("input[name='start_date']").addEventListener("change", function () {
-        const startDate = new Date(this.value);
-        if (isNaN(startDate)) return;
-
-        const endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 90); // Adds 90 days
-
-        const year = endDate.getFullYear();
-        const month = String(endDate.getMonth() + 1).padStart(2, '0');
-        const day = String(endDate.getDate()).padStart(2, '0');
-
-        const formattedEndDate = `${year}-${month}-${day}`;
-
-        const endDateInput = document.querySelector("input[name='end_date']");
-        endDateInput.value = formattedEndDate;
-        // 🟢 Removed `readOnly = true` to allow manual edits
-    });
-</script>
+    <script>
+        document.querySelector("form").addEventListener("submit", function () {
+            const btn = document.querySelector("button[type='submit']");
+            btn.innerHTML = "Generating...";
+            // Do NOT disable button, since download prevents reload
+            setTimeout(() => {
+                btn.innerHTML = "Generate Offer Letter";
+            }, 4000);
+        });
+    </script>
 
 
-    
+    <script>
+        document.querySelector("input[name='start_date']").addEventListener("change", function () {
+            const startDate = new Date(this.value);
+            if (isNaN(startDate)) return;
+
+            const endDate = new Date(startDate);
+            endDate.setDate(endDate.getDate() + 90); // Adds 90 days
+
+            const year = endDate.getFullYear();
+            const month = String(endDate.getMonth() + 1).padStart(2, '0');
+            const day = String(endDate.getDate()).padStart(2, '0');
+
+            const formattedEndDate = `${year}-${month}-${day}`;
+
+            const endDateInput = document.querySelector("input[name='end_date']");
+            endDateInput.value = formattedEndDate;
+            // 🟢 Removed `readOnly = true` to allow manual edits
+        });
+    </script>
+
+
+
 </body>
+
 </html>
